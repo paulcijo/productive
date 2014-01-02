@@ -1,0 +1,136 @@
+<html>
+	<head>
+		<title>Productive | The no-bs productivity app</title>
+		
+		<link rel = "stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-switch.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		
+	    <!--
+	    <link rel = "stylesheet" href = "/css/index.css">
+	    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+	    <link rel="stylesheet" href="http://bdmdesign.github.io/bootstrap-switch/static/stylesheets/flat-ui-fonts.css">
+	-->
+	</head>
+	<body>
+		
+		
+
+		{% if user %}
+			<div class = "row-fluid">
+				<div class = "thumbnail span12" style = 'padding-left: 20px; padding-right: 20px'>
+					<h1 class = "span9" style = "color: skyblue;">
+						productive
+						<small style = "color:grey">
+							the no-bs productivity app
+						</small>
+					</h1>
+					<caption class = "span3">
+						<br>
+						<a href = "{{ logout }}" class = "pull-right btn btn-danger">log out</a>
+					</caption>
+				</div>
+			</div>
+			<br>
+			<div class = "container">
+				<div class = "row-fluid">
+					<div class = "span3"></div>
+					<div class = "thumbnail span6">
+						<div class = "caption">
+							{% if not tasks %}
+								<p class = "lead" style = "color: grey;">
+									If you could do just 3 things what would you do?
+								</p><hr>
+								<form method = "POST" action = "/process-tasks">
+									<LABEL>Task1</LABEL>
+									<textarea name = "task1" class = "span12"></textarea>
+									<br><LABEL>Task2</LABEL>
+									<textarea name = "task2" class = "span12"></textarea>
+									<br><LABEL>Task3</LABEL>
+									<textarea name = "task3" class = "span12"></textarea>
+									<br>
+									<input type = "submit" class = "btn">
+								</form>
+							{% else %}
+								<center>
+									<p class = "lead" style ="font-size: 30px; color: brown;"> Your tasks today </p><hr>
+								</center>
+								{% for task in tasks %}
+									<ul class = "span12 nav nav-pills nav-stacked">
+									{% for task_node in task.tasklist %}				
+										<li class = "lead">
+											<a href = "#">
+												<div class = "span2">
+													<i class = "icon-ok"></i>
+												</div>
+												{{ task_node.content }}
+											</a>
+										</li>
+									
+									{% endfor %}
+									</ul>
+								{% endfor %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% else %}
+		
+			<div class = "row-fluid">
+				<div class = "thumbnail span12" style = 'padding-left: 20px; padding-right: 20px'>
+					<h1 class = "span9" style = "color: skyblue;">
+						productive
+						<small style = "color:grey">
+							the no-bs productivity app
+						</small>
+					</h1>
+					<caption class = "span3">
+						<br>
+						<a href = "{{ login }}" class = "pull-right btn btn-danger">log in</a>
+					</caption>
+				</div>
+			</div>
+			
+			<div class = "row-fluid">
+				<div class = "thumbnail" style = "padding: 80px; background: whitesmoke;">
+					<center>
+						<p class = "lead" style = "font-size: 30px;">Get <b style = "color: skyblue">MORE</b> done by doing <font style = "color:skyblue">LESS</font></p>
+						<a title = "Google account required" href = "{{ login }}" class = "btn btn-large btn-info">Get started in seconds</a>
+						<br>
+					</center>
+				</div>
+			</div>
+			
+			<div class = "row-fluid thumbnail" >
+				
+					<div class = "span12" style = "padding: 80px;">
+						
+						<center><p class = "lead" style = "font-size: 30px">
+							Answer these every morning and work your way to max-results
+						</p></center>
+						<div class = "row-fluid">
+							<div class = "span6">
+								<p class = "lead" style = "color: grey;">
+									1. If you could do just 3 things what would you do?
+								</p>
+							</div>
+							<div class = "span6">
+								<p class = "lead" style = "color: grey;">2. If you wouldn't do 3 things what would they be?
+								</p>
+							</div>
+						</div>
+				</div>
+			</div>
+		
+		{% endif %}
+
+
+	<!--scripts-->
+	<script src="js/jquery.js"></script>
+	<script src = "js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-switch.js"></script>
+  	
+	</body>
+</html>
